@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "01": "ts-node ./01/index.ts"
+    }
+}
