@@ -19,9 +19,9 @@ function solve(commands: Command[]): number {
         y = 0
 
     for (let command of commands) {
-        command.direction === 'forward' && (x += command.units)
-        command.direction === 'down' && (y += command.units)
-        command.direction === 'up' && (y -= command.units)
+        if (command.direction === 'forward') x += command.units
+        else if (command.direction === 'down') y += command.units
+        else if (command.direction === 'up') y -= command.units
     }
 
     return x * y
@@ -33,9 +33,11 @@ function solve2(commands: Command[]): number {
         aim = 0
 
     for (let command of commands) {
-        command.direction === 'forward' && (x += command.units) && (y += command.units * aim)
-        command.direction === 'down' && (aim += command.units)
-        command.direction === 'up' && (aim -= command.units)
+        if (command.direction === 'forward') {
+            x += command.units
+            y += command.units * aim
+        } else if (command.direction === 'down') aim += command.units
+        else if (command.direction === 'up') aim -= command.units
     }
 
     return x * y
