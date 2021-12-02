@@ -1,6 +1,7 @@
 {
     "scripts": {
-        "01": "ts-node ./01/index.ts"
+        "01": "ts-node ./01/index.ts",
+        "02": "ts-node ./02/index.ts"
     },
     "dependencies": {
         "lodash": "^4.17.21"
