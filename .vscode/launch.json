@@ -5,7 +5,7 @@
             "type": "node-terminal",
             "name": "Run Script: start",
             "request": "launch",
-            "command": "yarn run 03",
+            "command": "yarn run 04",
             "cwd": "${workspaceFolder}"
         }
     ]
