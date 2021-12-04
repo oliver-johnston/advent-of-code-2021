@@ -8,41 +8,17 @@ class Board {
         this.numbers = numbers
     }
 
-    mark(number: number) {
-        for (let i = 0; i < this.numbers.length; i++) {
-            let row = this.numbers[i]
-            for (let j = 0; j < row.length; j++) {
-                if (row[j] === number) {
-                    row[j] = -1
-                }
-            }
-        }
+    isFinished(results: number[]): boolean {
+        let toCheck = [...this.numbers, ..._.zip(...this.numbers)]
+        return toCheck.some((row) => row.every((n) => results.includes(n as number)))
     }
 
-    isFinished(): boolean {
-        for (let i = 0; i < this.numbers.length; i++) {
-            if (_.every(this.numbers[i], (x) => x === -1)) return true
-        }
-
-        for (let j = 0; j < this.numbers[0].length; j++) {
-            var col = _.range(0, this.numbers.length).map((i) => this.numbers[i][j])
-            if (_.every(col, (x) => x === -1)) return true
-        }
-
-        return false
-    }
-
-    score(): number {
-        let score = 0
-        for (let i = 0; i < this.numbers.length; i++) {
-            let row = this.numbers[i]
-            for (let j = 0; j < row.length; j++) {
-                if (row[j] >= 0) {
-                    score += row[j]
-                }
-            }
-        }
-        return score
+    score(results: number[]): number {
+        return _.chain(this.numbers)
+            .flatten()
+            .filter((n) => !results.includes(n))
+            .sum()
+            .value()
     }
 }
 
@@ -73,15 +49,17 @@ function parseBoard(board: string): Board {
 }
 
 function solve(numbers: number[], boards: Board[]): number {
+    let results: number[] = []
+
     for (let number of numbers) {
-        boards.forEach((b) => b.mark(number))
+        results.push(number)
 
         let finished = _.chain(boards)
-            .filter((b) => b.isFinished())
+            .filter((b) => b.isFinished(results))
             .first()
             .value()
         if (finished != null) {
-            return finished.score() * number
+            return finished.score(results) * number
         }
     }
 
@@ -89,15 +67,17 @@ function solve(numbers: number[], boards: Board[]): number {
 }
 
 function solve2(numbers: number[], boards: Board[]): number {
+    let results: number[] = []
+
     for (let number of numbers) {
-        boards.forEach((b) => b.mark(number))
+        results.push(number)
 
         if (boards.length > 1) {
-            boards = boards.filter((b) => !b.isFinished())
+            boards = boards.filter((b) => !b.isFinished(results))
         }
 
-        if (boards.length === 1 && boards[0].isFinished()) {
-            return boards[0].score() * number
+        if (boards.length === 1 && boards[0].isFinished(results)) {
+            return boards[0].score(results) * number
         }
     }
 
