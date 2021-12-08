@@ -26,7 +26,8 @@ console.log(`Part 1 Answer: ${solve(data, fuel1)}`)
 
 const fuel2 = (x: number, y: number) => {
     const distance = Math.abs(x - y)
-    return _.sum(_.range(1, distance + 1))
+    //return _.sum(_.range(1, distance + 1)) // slow
+    return (distance / 2) * (distance + 1) // fast
 }
 
 console.log(`Part 2 Example: ${solve(example, fuel2)}`)
