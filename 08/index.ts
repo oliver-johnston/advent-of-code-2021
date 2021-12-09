@@ -1,6 +1,5 @@
 import * as utils from '../utils'
 import * as _ from 'lodash'
-import { sortBy } from 'lodash'
 
 interface Line {
     inputs: string[]

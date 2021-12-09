@@ -7,7 +7,8 @@
         "05": "ts-node ./05/index.ts",
         "06": "ts-node ./06/index.ts",
         "07": "ts-node ./07/index.ts",
-        "08": "ts-node ./08/index.ts"
+        "08": "ts-node ./08/index.ts",
+        "09": "ts-node ./09/index.ts"
     },
     "dependencies": {
         "lodash": "^4.17.21"
