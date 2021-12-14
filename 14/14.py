@@ -1,6 +1,4 @@
-from collections import defaultdict
 from typing import Counter
-from math import ceil
 
 
 def readData(file):
